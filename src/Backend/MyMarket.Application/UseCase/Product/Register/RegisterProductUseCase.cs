@@ -1,4 +1,5 @@
-﻿using MyMarket.Communication.Requests;
+﻿using MyMarket.Application.Validator;
+using MyMarket.Communication.Requests;
 using MyMarket.Communication.Response;
 
 namespace MyMarket.Application.UseCase.Product.Register
@@ -26,7 +27,15 @@ namespace MyMarket.Application.UseCase.Product.Register
 
         private void Validate(RequestRegisteredProductJson request)
         {
-            // Implementar validações necessárias
+            var validator = new RegisterProductValidator();
+
+            var result = validator.Validate(request);
+
+            if (!result.IsValid)
+            {
+                var errors = result.Errors.Select(e => e.ErrorMessage).ToList();
+                throw new ArgumentException(string.Join("; ", errors));
+            }
         }
     }
 }
