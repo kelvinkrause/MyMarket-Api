@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\MyMarket.Communication\MyMarket.Communication.csproj" />
+    <ProjectReference Include="..\..\Shared\MyMarket.Exceptions\MyMarket.Exceptions.csproj" />
   </ItemGroup>
 
 </Project>
