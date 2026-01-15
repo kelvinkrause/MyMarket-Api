@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MyMarket.Communication.Requests;
+using MyMarket.Exceptions.Resources;
 
 namespace MyMarket.Application.Validator
 {
@@ -8,22 +9,22 @@ namespace MyMarket.Application.Validator
         public RegisterProductValidator()
         {
             RuleFor(product => product.Name)
-                .NotEmpty().WithMessage("Product name is required.")
-                .MaximumLength(100).WithMessage("Product name must not exceed 100 characters.");
+                .NotEmpty().WithMessage(ResourceMessageException.PRODUCT_NAME_REQUIRED)
+                .MaximumLength(100).WithMessage(ResourceMessageException.PRODUCT_NAME_MAX_LENGTH);
             RuleFor(product => product.Description)
                 .MaximumLength(500)
-                .WithMessage("Product description must not exceed 500 characters.");
+                .WithMessage(ResourceMessageException.PRODUCT_DESCRIPTION_MAX_LENGTH);
             RuleFor(product => product.Price)
                 .GreaterThan(0)
-                .WithMessage("Price must be greater than zero.");
+                .WithMessage(ResourceMessageException.PRODUCT_PRICE_INVALID);
             RuleFor(product => product.StockQuantity)
                 .GreaterThanOrEqualTo(0)
-                .WithMessage("Stock quantity cannot be negative.");
+                .WithMessage(ResourceMessageException.PRODUCT_STOCK_QUANTITY_INVALID);
             RuleFor(product => product.Category)
-                .NotEmpty().WithMessage("Product category is required.");
+                .NotEmpty().WithMessage(ResourceMessageException.PRODUCT_CATEGORY_REQUIRED);
             RuleFor(product => product.Barcode)
-                .NotEmpty().WithMessage("Product barcode is required.")
-                .Matches(@"^\d{12,13}$").WithMessage("Barcode must be 12 or 13 digits.");
+                .NotEmpty().WithMessage(ResourceMessageException.PRODUCT_BARCODE_REQUIRED)
+                .Matches(@"^\d{12,13}$").WithMessage(ResourceMessageException.PRODUCT_BARCODE_INVALID_FORMAT);
         }
     }
 }
