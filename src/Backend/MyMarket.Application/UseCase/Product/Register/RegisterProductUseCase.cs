@@ -34,6 +34,7 @@ namespace MyMarket.Application.UseCase.Product.Register
             if (!result.IsValid)
             {
                 var errors = result.Errors.Select(e => e.ErrorMessage).ToList();
+
                 throw new ArgumentException(string.Join("; ", errors));
             }
         }
