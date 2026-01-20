@@ -61,6 +61,15 @@ namespace MyMarket.Exceptions.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown error..
+        /// </summary>
+        public static string GENERIC_UNKNOWN_ERROR {
+            get {
+                return ResourceManager.GetString("GENERIC_UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Barcode must be 12 or 13 digits..
         /// </summary>
         public static string PRODUCT_BARCODE_INVALID_FORMAT {

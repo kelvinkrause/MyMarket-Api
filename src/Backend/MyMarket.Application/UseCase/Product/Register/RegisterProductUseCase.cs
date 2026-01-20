@@ -1,6 +1,7 @@
 ﻿using MyMarket.Application.Validator;
 using MyMarket.Communication.Requests;
 using MyMarket.Communication.Response;
+using MyMarket.Exceptions.Exceptions;
 
 namespace MyMarket.Application.UseCase.Product.Register
 {
@@ -35,7 +36,7 @@ namespace MyMarket.Application.UseCase.Product.Register
             {
                 var errors = result.Errors.Select(e => e.ErrorMessage).ToList();
 
-                throw new ArgumentException(string.Join("; ", errors));
+                throw new ErrorOnValidationException(errors);
             }
         }
     }
