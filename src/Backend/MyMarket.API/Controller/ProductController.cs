@@ -19,7 +19,6 @@ namespace MyMarket.API.Controller
                 var response = await useCase.Execute(request);
 
                 return Created(string.Empty, response);
-            
         }
     }
 }
