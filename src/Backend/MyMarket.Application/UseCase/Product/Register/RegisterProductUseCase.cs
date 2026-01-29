@@ -1,4 +1,5 @@
-﻿using MyMarket.Application.Validator;
+﻿using MyMarket.Application.Services.AutoMapper;
+using MyMarket.Application.Validator;
 using MyMarket.Communication.Requests;
 using MyMarket.Communication.Response;
 using MyMarket.Exceptions.Exceptions;
@@ -11,16 +12,29 @@ namespace MyMarket.Application.UseCase.Product.Register
         {
 
             Validate(request);
+
+            //var autoMapper = new AutoMapper.MapperConfiguration(cfg =>
+            //{
+            //    cfg.AddProfile(new AutoMapping());
+            //}).CreateMapper();
+
+            var autoMapper = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<RequestRegisteredProductJson, Domain.Entities.Product>();
+            }).CreateMapper();
+
+            var product = autoMapper.Map<Domain.Entities.Product>(request);
+
             // Mapear a entidade
             // Salvar no banco de dados
 
             var response = new ResponseRegisteredProductJson
             {
-                Id = 1,
-                Name = request.Name,
-                Description = request.Description,
-                Price = request.Price,
-                CreatedAt = DateTime.UtcNow
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                CreatedOn = DateTime.UtcNow
             };
 
             return Task.FromResult(response);
