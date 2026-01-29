@@ -14,19 +14,11 @@ namespace MyMarket.API.Controller
         [ProducesResponseType(typeof(ResponseRegisteredProductJson), StatusCodes.Status201Created)]
         public async Task<IActionResult> RegisterAsync([FromBody] RequestRegisteredProductJson request)
         {
-            try
-            {
                 var useCase = new RegisterProductUseCase();
 
                 var response = await useCase.Execute(request);
 
                 return Created(string.Empty, response);
-            }
-            catch (ErrorOnValidationException ex)
-            {
-                return BadRequest(new ResponseErrorJson(ex.MessageErrors));
-            }
-            
         }
     }
 }

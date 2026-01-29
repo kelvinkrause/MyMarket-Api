@@ -25,7 +25,6 @@ namespace MyMarket.API.Filter
                 context.Result = new BadRequestObjectResult(new ResponseErrorJson(error.MessageErrors));
             }
         }
-
         private void ThrowUnknowException(ExceptionContext context)
         {
              context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
