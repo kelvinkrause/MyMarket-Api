@@ -2,8 +2,8 @@
 {
     public interface IProductReadOnlyRepository
     {
-        Task<Entities.Product?> GetByIdAsync(Guid id);
+        Task<Entities.Product?> GetByIdAsync(int id);
         Task<IEnumerable<Entities.Product>> GetAllAsync();
-        Task<bool> ExistActiveProduct(Guid id);
+        Task<bool> ExistsActiveProduct(string barcode);
     }
 }
