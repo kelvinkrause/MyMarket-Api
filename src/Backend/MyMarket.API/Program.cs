@@ -1,5 +1,7 @@
 using MyMarket.API.Filter;
 using MyMarket.API.Middleware;
+using MyMarket.Infrastructure;
+using MyMarket.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,9 @@ builder.Services.AddSwaggerGen();
 
 // Add global exception filter
 builder.Services.AddMvc(options => options.Filters.Add<ExceptionFilter>());
+
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

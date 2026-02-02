@@ -1,14 +1,19 @@
-﻿using MyMarket.Application.Services.AutoMapper;
+﻿using AutoMapper;
+using MyMarket.Application.Interfaces;
 using MyMarket.Application.Validator;
 using MyMarket.Communication.Requests;
 using MyMarket.Communication.Response;
+using MyMarket.Domain.Repository.Product;
 using MyMarket.Exceptions.Exceptions;
 
 namespace MyMarket.Application.UseCase.Product.Register
 {
-    public class RegisterProductUseCase
+    public class RegisterProductUseCase : IRegisterProductUseCase
     {
-        public Task<ResponseRegisteredProductJson> Execute(RequestRegisteredProductJson request)
+        private readonly IProductReadOnlyRepository _productReadOnlyRepository;
+        private readonly IProductWriteOnlyRepository _productWriteOnlyRepository;
+        private readonly IMapper _mapper;
+        public async Task<ResponseRegisteredProductJson> Execute(RequestRegisteredProductJson request)
         {
 
             Validate(request);
@@ -18,14 +23,15 @@ namespace MyMarket.Application.UseCase.Product.Register
             //    cfg.AddProfile(new AutoMapping());
             //}).CreateMapper();
 
-            var autoMapper = new AutoMapper.MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<RequestRegisteredProductJson, Domain.Entities.Product>();
-            }).CreateMapper();
+            //var autoMapper = new AutoMapper.MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<RequestRegisteredProductJson, Domain.Entities.Product>();
+            //}).CreateMapper();
 
-            var product = autoMapper.Map<Domain.Entities.Product>(request);
+            var product = _mapper.Map<Domain.Entities.Product>(request);
 
-            // Mapear a entidade
+            await _productWriteOnlyRepository.AddAsync(product);
+
             // Salvar no banco de dados
 
             var response = new ResponseRegisteredProductJson
@@ -37,7 +43,7 @@ namespace MyMarket.Application.UseCase.Product.Register
                 CreatedOn = DateTime.UtcNow
             };
 
-            return Task.FromResult(response);
+            return response;
         }
 
         private void Validate(RequestRegisteredProductJson request)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyMarket.Application.Interfaces;
 using MyMarket.Application.UseCase.Product.Register;
 using MyMarket.Communication.Requests;
 using MyMarket.Communication.Response;
@@ -12,10 +13,10 @@ namespace MyMarket.API.Controller
     {
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegisteredProductJson), StatusCodes.Status201Created)]
-        public async Task<IActionResult> RegisterAsync([FromBody] RequestRegisteredProductJson request)
+        public async Task<IActionResult> RegisterAsync(
+            [FromBody] RequestRegisteredProductJson request,
+            [FromServices] IRegisterProductUseCase useCase)
         {
-                var useCase = new RegisterProductUseCase();
-
                 var response = await useCase.Execute(request);
 
                 return Created(string.Empty, response);
