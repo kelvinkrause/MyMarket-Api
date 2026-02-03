@@ -13,6 +13,16 @@ namespace MyMarket.Application.UseCase.Product.Register
         private readonly IProductReadOnlyRepository _productReadOnlyRepository;
         private readonly IProductWriteOnlyRepository _productWriteOnlyRepository;
         private readonly IMapper _mapper;
+
+        public RegisterProductUseCase(
+            IProductReadOnlyRepository productReadOnlyRepository,
+            IProductWriteOnlyRepository productWriteOnlyRepository,
+            IMapper mapper)
+        {
+            _productReadOnlyRepository = productReadOnlyRepository;
+            _productWriteOnlyRepository = productWriteOnlyRepository;
+            _mapper = mapper;
+        }
         public async Task<ResponseRegisteredProductJson> Execute(RequestRegisteredProductJson request)
         {
 

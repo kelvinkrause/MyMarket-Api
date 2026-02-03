@@ -22,8 +22,10 @@ namespace MyMarket.Infrastructure
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetMyMarketConnectionString();
-            services.AddDbContext<MyMarketDbContext>(options => 
-                options.UseSqlServer(connectionString));
+            services.AddDbContext<MyMarketDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
         }
 
         private static void AddRepositories(IServiceCollection services)

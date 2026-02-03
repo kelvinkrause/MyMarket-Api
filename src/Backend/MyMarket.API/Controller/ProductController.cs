@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyMarket.Application.Interfaces;
-using MyMarket.Application.UseCase.Product.Register;
 using MyMarket.Communication.Requests;
 using MyMarket.Communication.Response;
-using MyMarket.Exceptions.Exceptions;
 
 namespace MyMarket.API.Controller
 {
