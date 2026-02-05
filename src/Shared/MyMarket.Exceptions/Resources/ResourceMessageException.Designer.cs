@@ -70,6 +70,15 @@ namespace MyMarket.Exceptions.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A product with this barcode already exists..
+        /// </summary>
+        public static string PRODUCT_BARCODE_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("PRODUCT_BARCODE_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Barcode must be 12 or 13 digits..
         /// </summary>
         public static string PRODUCT_BARCODE_INVALID_FORMAT {

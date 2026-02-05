@@ -120,6 +120,9 @@
   <data name="GENERIC_UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error.</value>
   </data>
+  <data name="PRODUCT_BARCODE_ALREADY_EXISTS" xml:space="preserve">
+    <value>A product with this barcode already exists.</value>
+  </data>
   <data name="PRODUCT_BARCODE_INVALID_FORMAT" xml:space="preserve">
     <value>Barcode must be 12 or 13 digits.</value>
   </data>
