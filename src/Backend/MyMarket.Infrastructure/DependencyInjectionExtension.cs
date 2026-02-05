@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyMarket.Domain.Repositories;
 using MyMarket.Domain.Repository.Product;
 using MyMarket.Infrastructure.DataAccess;
 using MyMarket.Infrastructure.Extensions;
@@ -30,6 +31,8 @@ namespace MyMarket.Infrastructure
 
         private static void AddRepositories(IServiceCollection services)
         {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<IProductReadOnlyRepository, ProductRepository>();
             services.AddScoped<IProductWriteOnlyRepository, ProductRepository>();
         }
