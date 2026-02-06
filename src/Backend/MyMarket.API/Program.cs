@@ -2,6 +2,9 @@ using MyMarket.API.Filter;
 using MyMarket.API.Middleware;
 using MyMarket.Infrastructure;
 using MyMarket.Application;
+using MyMarket.Infrastructure.Migrations;
+using Microsoft.Extensions.Configuration;
+using MyMarket.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,4 +35,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+MigrateDatabase();
+
 app.Run();
+
+void MigrateDatabase()
+{
+    var connectionString = builder.Configuration.GetMyMarketConnectionString();
+    DatabaseMigration.Migrations(connectionString);
+}
