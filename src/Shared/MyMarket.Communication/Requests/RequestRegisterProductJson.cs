@@ -1,6 +1,6 @@
 ﻿namespace MyMarket.Communication.Requests
 {
-    public class RequestRegisteredProductJson
+    public class RequestRegisterProductJson
     {
         public string Name { get; set; }
         public string Description { get; set; }

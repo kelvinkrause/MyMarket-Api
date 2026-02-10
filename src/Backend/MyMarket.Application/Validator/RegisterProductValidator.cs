@@ -4,7 +4,7 @@ using MyMarket.Exceptions.Resources;
 
 namespace MyMarket.Application.Validator
 {
-    public class RegisterProductValidator : AbstractValidator<RequestRegisteredProductJson>
+    public class RegisterProductValidator : AbstractValidator<RequestRegisterProductJson>
     {
         public RegisterProductValidator()
         {
