@@ -17,7 +17,7 @@ namespace MyMarket.Infrastructure.Migrations.Versions
                 .WithColumn("Price").AsDecimal(18, 2).NotNullable()
                 .WithColumn("StockQuantity").AsInt32().NotNullable()
                 .WithColumn("Category").AsString(255).NotNullable()
-                .WithColumn("Barcode").AsString(255).NotNullable().Unique();
+                .WithColumn("Barcode").AsString(13).NotNullable().Unique();
         }
     }
 }

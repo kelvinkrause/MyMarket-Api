@@ -5,6 +5,6 @@ namespace MyMarket.Application.Interfaces
 {
     public interface IRegisterProductUseCase
     {
-        Task<ResponseRegisteredProductJson> Execute(RequestRegisteredProductJson request);
+        Task<ResponseRegisteredProductJson> Execute(RequestRegisterProductJson request);
     }
 }

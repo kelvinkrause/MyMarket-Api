@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using MyMarket.Application.Interfaces;
 using MyMarket.Application.Services.AutoMapper;
 using MyMarket.Application.UseCase.Product.Register;
+using MyMarket.Application.Validator;
 
 namespace MyMarket.Application
 {
@@ -11,6 +13,7 @@ namespace MyMarket.Application
         {
             AddUseCases(services);
             AddAutoMapper(services);
+            AddValidators(services);
         }
 
         private static void AddUseCases(IServiceCollection services)
@@ -24,6 +27,11 @@ namespace MyMarket.Application
             {
                 cfg.AddProfile(new AutoMapping());
             }).CreateMapper());
+        }
+
+        private static void AddValidators(IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<RegisterProductValidator>();
         }
     }
 }

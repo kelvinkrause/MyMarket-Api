@@ -32,8 +32,9 @@ namespace MyMarket.Infrastructure.Migrations
 
         private static void EnsureDatabaseCreated(string connetionString)
         {
+            
             var connectionStrigBuilder = new SqlConnectionStringBuilder(connetionString);
-             
+
             var databaseName = connectionStrigBuilder.InitialCatalog;
             
             connectionStrigBuilder.Remove("Initial Catalog");
