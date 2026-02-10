@@ -12,7 +12,7 @@ namespace MyMarket.API.Controller
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegisteredProductJson), StatusCodes.Status201Created)]
         public async Task<IActionResult> RegisterAsync(
-            [FromBody] RequestRegisteredProductJson request,
+            [FromBody] RequestRegisterProductJson request,
             [FromServices] IRegisterProductUseCase useCase)
         {
                 var response = await useCase.Execute(request);

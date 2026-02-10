@@ -13,7 +13,7 @@ namespace MyMarket.Application.Services.AutoMapper
         
         private void RequestToDomain()
         {
-            CreateMap<RequestRegisteredProductJson, Product>();
+            CreateMap<RequestRegisterProductJson, Product>();
         }
     }
 }

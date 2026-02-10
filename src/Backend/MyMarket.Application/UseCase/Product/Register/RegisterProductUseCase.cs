@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MyMarket.Application.Interfaces;
 using MyMarket.Application.Validator;
 using MyMarket.Communication.Requests;
@@ -14,19 +15,24 @@ namespace MyMarket.Application.UseCase.Product.Register
     {
         private readonly IProductReadOnlyRepository _productReadOnlyRepository;
         private readonly IProductWriteOnlyRepository _productWriteOnlyRepository;
+        private readonly IValidator<RequestRegisterProductJson> _validator;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public RegisterProductUseCase(
             IProductReadOnlyRepository productReadOnlyRepository,
             IProductWriteOnlyRepository productWriteOnlyRepository,
+            IValidator<RequestRegisterProductJson> validator,
+            IUnitOfWork unitOfWork,
             IMapper mapper)
         {
             _productReadOnlyRepository = productReadOnlyRepository;
             _productWriteOnlyRepository = productWriteOnlyRepository;
+            _validator = validator;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<ResponseRegisteredProductJson> Execute(RequestRegisteredProductJson request)
+        public async Task<ResponseRegisteredProductJson> Execute(RequestRegisterProductJson request)
         {
 
             await ValidateAsync(request);
@@ -49,11 +55,10 @@ namespace MyMarket.Application.UseCase.Product.Register
             return response;
         }
 
-        private async Task ValidateAsync(RequestRegisteredProductJson request)
+        private async Task ValidateAsync(RequestRegisterProductJson request)
         {
-            var validator = new RegisterProductValidator();
 
-            var result = validator.Validate(request);
+            var result = await _validator.ValidateAsync(request);
 
             var existingProduct = await _productReadOnlyRepository.ExistsActiveProduct(request.Barcode);
 
