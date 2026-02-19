@@ -5,7 +5,7 @@ using MyMarket.Exceptions.Resources;
 
 namespace Validators.Test.User.Register
 {
-    public class RegisterUserValidatorTest
+    public class RegisterProductValidatorTest
     {
         [Fact]
         public void Success()
