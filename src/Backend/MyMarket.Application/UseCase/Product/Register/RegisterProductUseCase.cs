@@ -62,7 +62,7 @@ namespace MyMarket.Application.UseCase.Product.Register
 
             var existingProduct = await _productReadOnlyRepository.ExistsActiveProduct(request.Barcode);
 
-            if(!existingProduct)
+            if(existingProduct)
                 result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceMessageException.PRODUCT_BARCODE_ALREADY_EXISTS));
             
 
